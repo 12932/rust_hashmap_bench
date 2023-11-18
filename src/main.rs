@@ -1,10 +1,11 @@
 use std::collections::HashMap;
+use gxhash::GxHashMap;
 use seahash::SeaHasher;
 use std::hash::BuildHasherDefault;
 use std::iter::repeat_with;
 
 use rustc_hash::FxHashMap;
-use ahash::AHashMap;
+use ahash::{AHashMap, HashMapExt};
 
 type SeaHashBuilder = BuildHasherDefault<SeaHasher>;
 
@@ -53,46 +54,56 @@ fn main() {
 	let hash_string = my_needle_string.clone();
 	my_hash_map.insert(hash_string, true);
 
-	 // Std HashMap with default hasher
-	 let mut std_hash_map = HashMap::new();
-	 std_hash_map.insert(my_needle_string.clone(), true);
-	 measure!("Std HashMap", 
-	 {
-		 for _ in 0..HAYSTACK_SEARCH_ITERATIONS {
-			 let _needle_found = std_hash_map.contains_key(&my_needle_string);
-		 }
-	 });
+	// Std HashMap with default hasher
+	let mut std_hash_map = HashMap::new();
+	std_hash_map.insert(my_needle_string.clone(), true);
+	measure!("Std HashMap", 
+	{
+		for _ in 0..HAYSTACK_SEARCH_ITERATIONS {
+			let _needle_found = std_hash_map.contains_key(&my_needle_string);
+		}
+	});
  
-	 // SeaHashMap
-	 let mut seahash_hash_map: HashMap<String, bool, SeaHashBuilder> = HashMap::with_hasher(SeaHashBuilder::default());
+	// SeaHashMap
+	let mut seahash_hash_map: HashMap<String, bool, SeaHashBuilder> = HashMap::with_hasher(SeaHashBuilder::default());
 
-	 seahash_hash_map.insert(my_needle_string.clone(), true);
-	 measure!("SeaHash HashMap", 
-	 {
-		 for _ in 0..HAYSTACK_SEARCH_ITERATIONS {
-			 let _needle_found = seahash_hash_map.contains_key(&my_needle_string);
-		 }
-	 });
+	seahash_hash_map.insert(my_needle_string.clone(), true);
+	measure!("SeaHash HashMap", 
+	{
+		for _ in 0..HAYSTACK_SEARCH_ITERATIONS {
+			let _needle_found = seahash_hash_map.contains_key(&my_needle_string);
+		}
+	});
  
-	 // FxHashMap
-	 let mut fx_hash_map: FxHashMap<String, bool> = FxHashMap::default();
-	 fx_hash_map.insert(my_needle_string.clone(), true);
-	 measure!("FxHashMap", 
-	 {
-		 for _ in 0..HAYSTACK_SEARCH_ITERATIONS {
-			 let _needle_found = fx_hash_map.contains_key(&my_needle_string);
-		 }
-	 });
+	// FxHashMap
+	let mut fx_hash_map: FxHashMap<String, bool> = FxHashMap::default();
+	fx_hash_map.insert(my_needle_string.clone(), true);
+	measure!("FxHashMap", 
+	{
+		for _ in 0..HAYSTACK_SEARCH_ITERATIONS {
+			let _needle_found = fx_hash_map.contains_key(&my_needle_string);
+		}
+	});
  
-	 // AHashMap
-	 let mut a_hash_map: AHashMap<String, bool> = AHashMap::new();
-	 a_hash_map.insert(my_needle_string.clone(), true);
-	 measure!("AHashMap", 
-	 {
-		 for _ in 0..HAYSTACK_SEARCH_ITERATIONS {
-			 let _needle_found = a_hash_map.contains_key(&my_needle_string);
-		 }
-	 });
+	// AHashMap
+	let mut a_hash_map: AHashMap<String, bool> = AHashMap::new();
+	a_hash_map.insert(my_needle_string.clone(), true);
+	measure!("AHashMap", 
+	{
+		for _ in 0..HAYSTACK_SEARCH_ITERATIONS {
+			let _needle_found = a_hash_map.contains_key(&my_needle_string);
+		}
+	});
+
+	// GxHash
+	let mut gx_hash_map: GxHashMap<String, bool> = GxHashMap::new();
+	gx_hash_map.insert(my_needle_string.clone(), true);
+	measure!("GxHash", 
+	{
+		for _ in 0..HAYSTACK_SEARCH_ITERATIONS {
+			let _needle_found = gx_hash_map.contains_key(&my_needle_string);
+		}
+	});
 		
 	// Vector search check
 	measure!("Vector search", 
