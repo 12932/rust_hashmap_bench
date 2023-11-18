@@ -1,5 +1,5 @@
 [package]
-name = "seahash_vs_iteration_search"
+name = "rust_hashmap_bench"
 version = "0.1.0"
 edition = "2021"
 
@@ -8,5 +8,6 @@ edition = "2021"
 [dependencies]
 ahash = "*"
 fastrand = "*"
+gxhash = "*"
 rustc-hash = "*"
 seahash = "*"
