@@ -8,6 +8,6 @@ edition = "2021"
 [dependencies]
 ahash = "*"
 fastrand = "*"
-gxhash = "*"
+gxhash = { version = "*", features = ["avx2"] }
 rustc-hash = "*"
 seahash = "*"

@@ -2,6 +2,7 @@ use gxhash::GxHashMap;
 use seahash::SeaHasher;
 use std::collections::HashMap;
 use std::hash::BuildHasherDefault;
+use std::hint::black_box;
 use std::iter::repeat_with;
 
 use ahash::{AHashMap, HashMapExt};
@@ -60,7 +61,7 @@ fn main() {
     std_hash_map.insert(my_needle_string.clone(), true);
     measure!("Std HashMap", {
         for _ in 0..HAYSTACK_SEARCH_ITERATIONS {
-            let _needle_found = std_hash_map.contains_key(&my_needle_string);
+            let _needle_found = black_box(std_hash_map.contains_key(&my_needle_string));
         }
     });
 
@@ -71,7 +72,7 @@ fn main() {
     seahash_hash_map.insert(my_needle_string.clone(), true);
     measure!("SeaHash HashMap", {
         for _ in 0..HAYSTACK_SEARCH_ITERATIONS {
-            let _needle_found = seahash_hash_map.contains_key(&my_needle_string);
+            let _needle_found = black_box(seahash_hash_map.contains_key(&my_needle_string));
         }
     });
 
@@ -80,7 +81,7 @@ fn main() {
     fx_hash_map.insert(my_needle_string.clone(), true);
     measure!("FxHashMap", {
         for _ in 0..HAYSTACK_SEARCH_ITERATIONS {
-            let _needle_found = fx_hash_map.contains_key(&my_needle_string);
+            let _needle_found = black_box(fx_hash_map.contains_key(&my_needle_string));
         }
     });
 
@@ -89,7 +90,7 @@ fn main() {
     a_hash_map.insert(my_needle_string.clone(), true);
     measure!("AHashMap", {
         for _ in 0..HAYSTACK_SEARCH_ITERATIONS {
-            let _needle_found = a_hash_map.contains_key(&my_needle_string);
+            let _needle_found = black_box(a_hash_map.contains_key(&my_needle_string));
         }
     });
 
@@ -98,14 +99,14 @@ fn main() {
     gx_hash_map.insert(my_needle_string.clone(), true);
     measure!("GxHash", {
         for _ in 0..HAYSTACK_SEARCH_ITERATIONS {
-            let _needle_found = gx_hash_map.contains_key(&my_needle_string);
+            let _needle_found = black_box(gx_hash_map.contains_key(&my_needle_string));
         }
     });
 
     // Vector search check
     measure!("Vector search", {
         for _ in 0..HAYSTACK_SEARCH_ITERATIONS {
-            let _needle_found = my_haystack_vector.contains(&my_needle_string);
+            let _needle_found = black_box(my_haystack_vector.contains(&my_needle_string));
             //print!("{:?}", needle_found) ;
         }
     });
