@@ -1,5 +1,5 @@
 # What is this?
-A very basic comparison between some easily-available hashers in Rust, with their default settings.
+A very basic, latency-focused comparison between some easily-available hashers in Rust, with their default settings.
 
 Right now GxHash only builds on nightly
 
