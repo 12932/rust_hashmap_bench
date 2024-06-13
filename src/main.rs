@@ -1,14 +1,13 @@
-use gxhash::GxHashMap;
-use seahash::SeaHasher;
-use std::collections::HashMap;
+use std::collections::HashMap as std_hash_map;
 use std::hash::BuildHasherDefault;
 use std::hint::black_box;
 use std::iter::repeat_with;
 
-use ahash::{AHashMap, HashMapExt};
+use ahash::AHashMap;
 use rustc_hash::FxHashMap;
+use gxhash::HashMapExt;
 
-type SeaHashBuilder = BuildHasherDefault<SeaHasher>;
+type SeaHashBuilder = BuildHasherDefault<seahash::SeaHasher>;
 
 /// Log how long it took to execute `$tt`, using `$reason` as the status
 /// message of what was timed
@@ -51,13 +50,13 @@ fn main() {
         my_haystack_vector.push(generate_random_string(NEEDLE_STRING_SIZE));
     }
 
-    let mut my_hash_map = HashMap::new();
+    let mut my_hash_map = std_hash_map::new();
 
     let hash_string = my_needle_string.clone();
     my_hash_map.insert(hash_string, true);
 
     // Std HashMap with default hasher
-    let mut std_hash_map = HashMap::new();
+    let mut std_hash_map = std_hash_map::new();
     std_hash_map.insert(my_needle_string.clone(), true);
     measure!("Std HashMap", {
         for _ in 0..HAYSTACK_SEARCH_ITERATIONS {
@@ -66,8 +65,8 @@ fn main() {
     });
 
     // SeaHashMap
-    let mut seahash_hash_map: HashMap<String, bool, SeaHashBuilder> =
-        HashMap::with_hasher(SeaHashBuilder::default());
+    let mut seahash_hash_map: std_hash_map<String, bool, SeaHashBuilder> =
+		std_hash_map::with_hasher(SeaHashBuilder::default());
 
     seahash_hash_map.insert(my_needle_string.clone(), true);
     measure!("SeaHash HashMap", {
@@ -95,7 +94,7 @@ fn main() {
     });
 
     // GxHash
-    let mut gx_hash_map: GxHashMap<String, bool> = GxHashMap::new();
+    let mut gx_hash_map: gxhash::HashMap<String, bool> = gxhash::HashMap::new();
     gx_hash_map.insert(my_needle_string.clone(), true);
     measure!("GxHash", {
         for _ in 0..HAYSTACK_SEARCH_ITERATIONS {

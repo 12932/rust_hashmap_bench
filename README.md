@@ -23,13 +23,13 @@ Hashing needle string `vwvM5MbpULSkeEK8NMWnlQarjya3OGnT` for 10000000 iterations
 On my Ryzen 5900x Desktop:
 
 ```
-Hashing needle string `vnPjrMkeQ504icoyFrW10MAicbY5BMFz` for 10000000 iterations
-[    186.7257 ms] Std HashMap
-[    252.0110 ms] SeaHash HashMap
-[     75.5276 ms] FxHashMap
-[     86.5610 ms] AHashMap
-[    187.0824 ms] GxHash
-[   2912.0235 ms] Vector search
+Hashing needle string `kX4K5CbCFyHsZsPyb9Il332pBMokgCmL` for 10000000 iterations
+[    196.7708 ms] Std HashMap
+[    347.4592 ms] SeaHash HashMap
+[     85.6588 ms] FxHashMap
+[     82.5427 ms] AHashMap
+[     79.4092 ms] GxHash
+[   3027.2902 ms] Vector search
 ```
 
 Interestingly FxHashMap beats AHash on Apple Silicon
