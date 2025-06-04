@@ -7,29 +7,29 @@ Right now GxHash only builds on nightly
 
 	const HAYSTACK_SIZE: usize = 128;
 	const NEEDLE_STRING_SIZE: usize = 32;
-	const HAYSTACK_SEARCH_ITERATIONS: usize = 10_000_000;
+	const HAYSTACK_SEARCH_ITERATIONS: usize = 100_000_000;
 
 On my Macbook M1 Max (2021):
 ```
 Hashing needle string `vwvM5MbpULSkeEK8NMWnlQarjya3OGnT` for 10000000 iterations
-[    178.1681 ms] Std HashMap
-[    157.0172 ms] SeaHash HashMap
-[     59.9349 ms] FxHashMap
-[     56.3037 ms] AHashMap
-[     58.5313 ms] GxHash
-[   2140.3751 ms] Vector search
+[   1739.6958 ms] Std HashMap 
+[   1982.6879 ms] SeaHash HashMap 
+[    525.5851 ms] FxHashMap 
+[    598.5227 ms] AHashMap 
+[    457.7710 ms] GxHash 
+[  21600.1275 ms] Vector search
 ```
 
 On my Ryzen 5900x Desktop:
 
 ```
 Hashing needle string `kX4K5CbCFyHsZsPyb9Il332pBMokgCmL` for 10000000 iterations
-[    196.7708 ms] Std HashMap
-[    347.4592 ms] SeaHash HashMap
-[     85.6588 ms] FxHashMap
-[     82.5427 ms] AHashMap
-[     79.4092 ms] GxHash
-[   3027.2902 ms] Vector search
+[   1930.2627 ms] Std HashMap
+[   2811.8873 ms] SeaHash HashMap
+[    590.5833 ms] FxHashMap
+[    584.7456 ms] AHashMap
+[    550.6112 ms] GxHash
+[  30315.7427 ms] Vector search
 ```
 
 Interestingly FxHashMap beats AHash on Apple Silicon
