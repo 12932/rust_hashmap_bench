@@ -29,7 +29,7 @@ fn generate_random_string(length: usize) -> String {
 fn main() {
     const HAYSTACK_SIZE: usize = 128;
     const NEEDLE_STRING_SIZE: usize = 32;
-    const HAYSTACK_SEARCH_ITERATIONS: usize = 10_000_000;
+    const HAYSTACK_SEARCH_ITERATIONS: usize = 100_000_000;
 
     let my_needle_string: String = generate_random_string(NEEDLE_STRING_SIZE);
 

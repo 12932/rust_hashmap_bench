@@ -11,3 +11,8 @@ fastrand = "*"
 gxhash = "*"
 rustc-hash = "*"
 seahash = "*"
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
